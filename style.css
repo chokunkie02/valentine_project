@@ -546,6 +546,10 @@ button:active {
     color: var(--secondary-color);
 }
 
+.final-message .btn-secondary {
+    margin-top: 1rem;
+}
+
 @media (max-width: 400px) {
     .container {
         padding: 1rem;
