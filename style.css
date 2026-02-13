@@ -1,0 +1,561 @@
+/* CSS Variables for Theming */
+:root {
+    /* Light Theme (Default) */
+    --bg-color: #fff0f5;
+    /* Lavender Blush */
+    --text-color: #5a4a4a;
+    --primary-color: #ff6b6b;
+    /* Soft Red */
+    --secondary-color: #ffafcc;
+    /* Orchid Pink */
+    --accent-color: #ffc8dd;
+    /* Cameo Pink */
+    --card-bg: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --font-heading: 'Itim', cursive;
+    --font-body: 'Sarabun', sans-serif;
+    --wobbly-animation: legacy-wobble;
+}
+
+[data-theme="dark"] {
+    /* Dark Romantic Theme */
+    --bg-color: #2b1d22;
+    /* Dark Brownish */
+    --text-color: #fce4ec;
+    --primary-color: #ff8fa3;
+    --secondary-color: #c9184a;
+    --accent-color: #590d22;
+    --card-bg: #4a2830;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Reset & Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    transition: background-color 0.5s ease, color 0.5s ease;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+.screen {
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.screen.fade-out {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.screen.fade-in {
+    opacity: 0;
+    transform: scale(1.05);
+}
+
+.screen.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    /* Mobile first constraint */
+    padding: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* Typography & Wobbly Effect */
+h1,
+h2,
+.highlight-date {
+    font-family: var(--font-heading);
+}
+
+.wobbly-text {
+    display: inline-block;
+    animation: wobbly 2s steps(10) infinite;
+}
+
+@keyframes wobbly {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(2deg);
+    }
+
+    50% {
+        transform: rotate(-1deg);
+    }
+
+    75% {
+        transform: rotate(1deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Buttons */
+button {
+    cursor: pointer;
+    font-family: var(--font-heading);
+    border: none;
+    outline: none;
+    transition: transform 0.1s;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.2rem;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    margin-top: 1.5rem;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    margin-top: 2rem;
+}
+
+#next-btn {
+    margin-left: 1rem;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--card-bg);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+
+.theme-toggle:hover {
+    transform: rotate(15deg) scale(1.1);
+}
+
+.icon-svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Custom Popup */
+/* Custom Popup Removed */
+
+
+/* Envelope Component */
+.envelope-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+}
+
+.envelope {
+    width: 200px;
+    height: 140px;
+    background-color: var(--secondary-color);
+    position: relative;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 10px 20px var(--shadow-color);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+    transform: rotate(2deg) scale(1.05);
+}
+
+.flap {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-top: 80px solid var(--accent-color);
+    transform-origin: top;
+    transition: transform 0.6s ease-in-out;
+    z-index: 3;
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.pocket {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 100px solid var(--primary-color);
+    border-right: 100px solid var(--primary-color);
+    border-bottom: 70px solid transparent;
+    border-radius: 0 0 10px 10px;
+    transform: rotate(180deg);
+    z-index: 2;
+}
+
+.letter-preview {
+    position: absolute;
+    bottom: 0;
+    width: 180px;
+    height: 120px;
+    background: white;
+    z-index: 1;
+    transition: transform 0.5s 0.6s ease-out;
+}
+
+.envelope.open .letter-preview {
+    transform: translateY(-60px);
+}
+
+.heart-seal {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    z-index: 4;
+    transition: opacity 0.3s;
+}
+
+.envelope.open .heart-seal {
+    opacity: 0;
+}
+
+.instruction-text {
+    margin-top: 2rem;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+/* Card Component (Main Content) */
+.card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px var(--shadow-color);
+    text-align: center;
+    border: 2px dashed var(--primary-color);
+    transform: scale(0.9);
+    opacity: 0;
+    animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.card-header h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-body p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.signature {
+    margin-top: 2rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+/* Calendar Component */
+.calendar-wrapper {
+    margin: 2rem auto;
+    width: 220px;
+    background: #fff;
+    border: 1px solid var(--text-color);
+    padding: 10px;
+    box-shadow: 3px 3px 0px var(--text-color);
+    color: #333;
+    /* Always dark text for calendar inside white box */
+}
+
+.calendar-header {
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 0.8rem;
+    gap: 2px;
+}
+
+.calendar-grid span {
+    padding: 2px;
+}
+
+.calendar-grid .dim {
+    color: #ccc;
+}
+
+.highlight-date {
+    position: relative;
+    color: red;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.highlight-date::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    background: transparent;
+    border: 2px solid red;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) skew(-5deg);
+    animation: circle-draw 1s steps(10) forwards;
+}
+
+/* Animations */
+.fade-in-text {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Floating Hearts */
+.heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+    animation: floatUp 5s linear forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Floating Hearts */
+.heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+    animation: floatUp 5s linear forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Heart Filling Page */
+.heart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    gap: 2rem;
+}
+
+.heart-container h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+}
+
+.heart-svg {
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.heart-svg:hover {
+    transform: scale(1.05);
+}
+
+.heart-svg:active {
+    transform: scale(0.95);
+}
+
+#heart-fill {
+    transition: y 0.3s ease, height 0.3s ease;
+}
+
+.heart-progress {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Scratch Card Page */
+.scratch-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    gap: 1.5rem;
+}
+
+.scratch-container h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+}
+
+.scratch-card-wrapper {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px var(--shadow-color);
+}
+
+.scratch-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.scratch-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    touch-action: none;
+}
+
+.scratch-canvas:active {
+    cursor: grabbing;
+}
+
+.scratch-instruction {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.scratch-instruction.hidden {
+    opacity: 0;
+}
+
+.final-message {
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    max-width: 400px;
+}
+
+.final-message p {
+    margin-bottom: 0.5rem;
+}
+
+.final-message .signature {
+    margin-top: 1.5rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+}

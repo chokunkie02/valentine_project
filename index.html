@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <meta name="description" content="A digital valentine's card.">
+
+    <!-- Google Fonts: Itim for cute handwritten feel, Sarabun for readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Sarabun:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Switch theme">
+        <!-- Minimalist Paint Brush SVG -->
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+                d="M12 2.69l5.74 5.74-5.77 5.77-5.74-5.74L12 2.69zM8 12l-2 5a2.5 2.5 0 0 0 2.5 2.5h0A2.5 2.5 0 0 0 11 17l-3-5z" />
+        </svg>
+    </button>
+
+    <!-- Background Elements -->
+    <div id="hearts-container" class="hearts-container" aria-hidden="true"></div>
+
+    <main class="container">
+        <!-- Section 1: The Envelope (Start Screen) -->
+        <section id="start-screen" class="screen active">
+            <div class="envelope-wrapper">
+                <div class="envelope" id="envelope">
+                    <div class="flap"></div>
+                    <div class="pocket"></div>
+                    <div class="letter-preview"></div>
+                    <div class="heart-seal">❤️</div>
+                </div>
+                <h1 class="wobbly-text instruction-text">แตะเพื่อเปิดจดหมาย</h1>
+                <button id="open-btn" class="btn-primary" aria-label="Open the love letter">เปิดเลย!</button>
+            </div>
+        </section>
+
+        <!-- Section 2: The Letter (Main Content) -->
+        <section id="main-content" class="screen hidden" aria-hidden="true">
+            <div class="card">
+                <header class="card-header">
+                    <h2 class="wobbly-text">Happy Valentine's Day!</h2>
+                </header>
+
+                <div class="card-body">
+                    <!-- Calendar moved here as requested -->
+                    <div class="calendar-wrapper fade-in-text">
+                        <div class="calendar">
+                            <div class="calendar-header">February</div>
+                            <div class="calendar-grid">
+                                <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                                <span class="dim">1</span><span class="dim">2</span><span class="dim">3</span><span
+                                    class="dim">4</span><span class="dim">5</span><span class="dim">6</span><span
+                                    class="dim">7</span>
+                                <span class="dim">8</span><span class="dim">9</span><span class="dim">10</span><span
+                                    class="dim">11</span><span class="dim">12</span><span class="dim">13</span><span
+                                    class="highlight-date">14</span>
+                                <span class="dim">15</span><span class="dim">16</span><span class="dim">17</span><span
+                                    class="dim">18</span><span class="dim">19</span><span class="dim">20</span><span
+                                    class="dim">21</span>
+                                <span class="dim">22</span><span class="dim">23</span><span class="dim">24</span><span
+                                    class="dim">25</span><span class="dim">26</span><span class="dim">27</span><span
+                                    class="dim">28</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="fade-in-text">สุขสันต์วันวาเลนไทน์นะจ๊ะ</p>
+                    <p class="fade-in-text">ขอให้มีความสุขมากๆ นะครับ</p>
+                    <p class="fade-in-text">คิดถึงนะ</p>
+
+                    <p class="fade-in-text signature">แบบนี้พอได้มั้ยยย ❤️</p>
+                </div>
+            </div>
+
+
+            <button id="replay-btn" class="btn-secondary fade-in-text" aria-label="Replay animation">ดูอีกครั้ง</button>
+            <button id="next-btn" class="btn-primary fade-in-text" aria-label="Next page">ถัดไป →</button>
+        </section>
+
+        <!-- Section 3: Heart Filling Page -->
+        <section id="heart-page" class="screen hidden" aria-hidden="true">
+            <div class="heart-container">
+                <h2 class="wobbly-text">กดค้างเพื่อเติมหัวใจ</h2>
+                <svg class="heart-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <clipPath id="heart-clip">
+                            <path
+                                d="M50,90 C50,90 10,60 10,40 C10,25 20,15 30,15 C40,15 50,25 50,25 C50,25 60,15 70,15 C80,15 90,25 90,40 C90,60 50,90 50,90 Z" />
+                        </clipPath>
+                    </defs>
+                    <!-- Background heart outline -->
+                    <path class="heart-outline"
+                        d="M50,90 C50,90 10,60 10,40 C10,25 20,15 30,15 C40,15 50,25 50,25 C50,25 60,15 70,15 C80,15 90,25 90,40 C90,60 50,90 50,90 Z"
+                        fill="none" stroke="var(--primary-color)" stroke-width="2" />
+                    <!-- Filled heart (grows on click) -->
+                    <rect id="heart-fill" x="0" y="100" width="100" height="0" fill="var(--primary-color)"
+                        clip-path="url(#heart-clip)" />
+                </svg>
+                <p class="heart-progress">0%</p>
+            </div>
+        </section>
+
+        <!-- Section 4: Scratch Card Page -->
+        <section id="scratch-page" class="screen hidden" aria-hidden="true">
+            <div class="scratch-container">
+                <h2 class="wobbly-text">ขูดเพื่อดูภาพ</h2>
+                <div class="scratch-card-wrapper">
+                    <img id="scratch-image" src="" alt="Hidden image" class="scratch-image">
+                    <canvas id="scratch-canvas" class="scratch-canvas"></canvas>
+                </div>
+                <p id="scratch-instruction" class="scratch-instruction">ลากนิ้วเพื่อขูด</p>
+                <div id="final-message" class="final-message hidden">
+                    <p class="fade-in-text">ยังไม่มีรูปดีๆเลยอ่า</p>
+                    <p class="fade-in-text">ไม่รู้จะเอารูปไรมาใส่</p>
+                    <p class="fade-in-text">ขอโทษเด้อที่ไม่มีของอะไรให้เลย</p>
+                    <p class="fade-in-text">ช่วงนี้ยุ่งๆ อะดิซอรี่น้าา</p>
+                    <p class="fade-in-text">ยังไงก็ดูแลตัวเองด้วยนะ</p>
+                    <p class="fade-in-text signature">คิดถึงเสมอนะ ❤️</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
