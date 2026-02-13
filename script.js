@@ -7,11 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
     const fadeElements = document.querySelectorAll('#main-content .fade-in-text');
     const replayBtn = document.getElementById('replay-btn');
+    const finalReplayBtn = document.getElementById('final-replay-btn');
 
     // 4. Replay functionality
     replayBtn.addEventListener('click', () => {
         location.reload();
     });
+
+    // Final page replay functionality
+    if (finalReplayBtn) {
+        finalReplayBtn.addEventListener('click', () => {
+            location.reload();
+        });
+    }
 
     // 1. Theme Toggle Logic
     themeToggle.addEventListener('click', () => {
