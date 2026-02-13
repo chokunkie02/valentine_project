@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fadeElements.forEach((el, index) => {
             setTimeout(() => {
                 el.classList.add('visible');
-            }, index * 800 + 500); // Stagger by 800ms, start after 500ms
+            }, index * 1200 + 500); // Stagger by 1200ms, start after 500ms
         });
 
         startFloatingHearts();
